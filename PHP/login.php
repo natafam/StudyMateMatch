@@ -58,6 +58,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $row = $result_user->fetch_assoc();
         if (password_verify($password, $row['User_password'])) { // Porównanie zahaszowanego hasła
             $_SESSION['User_type'] = 'User'; // Ustawienie typu użytkownika w sesji
+
+            $_SESSION["user_id"] = $row["User_ID"];
+
             header("Location: ../HTML/user-interface.php"); // Przekierowanie na stronę interfejsu użytkownika
             exit();
         }
