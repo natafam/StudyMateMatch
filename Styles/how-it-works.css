@@ -1,0 +1,210 @@
+.how-it-works-main-container {
+  width: 100%;
+  display: flex;
+  overflow: auto;
+  min-height: 100vh;
+  align-items: center;
+  flex-direction: column;
+}
+.how-it-works-hero {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  position: relative;
+  align-items: center;
+  flex-direction: column;
+}
+.how-it-works-why {
+  gap: 64px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding-top: 192px;
+  border-color: #b4b9c6;
+  padding-left: 80px;
+  padding-right: 80px;
+  flex-direction: column;
+  padding-bottom: 16px;
+  border-bottom-width: 1px;
+}
+.how-it-works-heading {
+  gap: 16px;
+  width: 100%;
+  display: flex;
+  position: relative;
+  max-width: 1440px;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+.how-it-works-header {
+  font-size: 56px;
+  max-width: 800px;
+  font-style: normal;
+  text-align: center;
+  font-weight: 600;
+}
+.how-it-works-ul {
+  width: auto;
+  margin-right: 0;
+  padding-left: 0;
+}
+.how-it-works-li {
+  font-size: 22px;
+  max-width: 700px;
+  margin-top: 24px;
+  text-align: center;
+  justify-self: center;
+  margin-bottom: 48px;
+}
+.how-it-works-h4 {
+  color: var(--dl-color-primaryteal-vibrantblue);
+  font-size: 26px;
+  font-style: normal;
+  text-align: center;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+.how-it-works-text-span {
+  font-size: 22px;
+  text-align: center;
+}
+.how-it-works-how {
+  gap: 64px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding-top: 80px;
+  padding-left: 80px;
+  padding-right: 80px;
+  flex-direction: column;
+  padding-bottom: 96px;
+  background-image: linear-gradient(to bottom, #d0f4fd 0, rgba(0, 167, 185, 0.88) 100%);
+}
+.how-it-works-h2 {
+  font-size: 56px;
+  max-width: 900px;
+  font-style: normal;
+  text-align: center;
+  font-weight: 600;
+}
+.how-it-works-paragraph {
+  font-size: 18px;
+  max-width: 700px;
+  text-align: center;
+  line-height: 27px;
+}
+.how-it-works-content {
+  gap: 8px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding-top: 32px;
+  margin-bottom: -16px;
+  flex-direction: column;
+  padding-bottom: 32px;
+}
+#content-1 {
+  background-color: rgba(0, 167, 185, 0.12);
+}
+#content-2 {
+  background-color: rgba(0, 167, 185, 0.24);
+}
+#content-3 {
+  background-color: rgba(0, 167, 185, 0.36);
+}
+#content-4 {
+  background-color: rgba(0, 167, 185, 0.48);
+}
+.how-it-works-section {
+  gap: var(--dl-space-space-unit);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.how-it-works-h3 {
+  font-size: 24px;
+  font-style: normal;
+  text-align: center;
+  font-weight: 600;
+  line-height: 36px;
+}
+.how-it-works-description {
+  max-width: 700px;
+  text-align: center;
+  line-height: 24px;
+}
+@media (max-width: 1200px) {
+  .how-it-works-header {
+    font-size: 48px;
+    max-width: 600px;
+  }
+  .how-it-works-h2 {
+    font-size: 48px;
+    max-width: 800px;
+  }
+  .how-it-works-paragraph {
+    font-size: 16px;
+    max-width: 600px;
+  }
+  .how-it-works-h3 {
+    font-size: 20px;
+    line-height: 30px;
+  }
+  .how-it-works-description {
+    max-width: 600px;
+  }
+}
+@media (max-width: 991px) {
+}
+@media (max-width: 767px) {
+  .how-it-works-hero {
+    height: 709px;
+  }
+  .how-it-works-why {
+    gap: 48px;
+    padding-top: 184px;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+  .how-it-works-header {
+    font-size: 30px;
+    max-width: 600px;
+    line-height: 36px;
+  }
+  .how-it-works-paragraph {
+    font-size: 14px;
+    max-width: 85%;
+    line-height: 21px;
+  }
+  .how-it-works-h2 {
+    font-size: 30px;
+    max-width: 600px;
+    line-height: 36px;
+  }
+  .how-it-works-content {
+    gap: 4px;
+  }
+  .how-it-works-h3 {
+    font-size: 22px;
+    line-height: 33px;
+  }
+  .how-it-works-description {
+    font-size: 14px;
+    max-width: 90%;
+    line-height: 21px;
+  }
+}
+@media (max-width: 479px) {
+  .how-it-works-header {
+    font-size: 28px;
+    max-width: 400px;
+  }
+  .how-it-works-h2 {
+    font-size: 28px;
+    max-width: 400px;
+  }
+  .how-it-works-description {
+    max-width: 85%;
+  }
+}

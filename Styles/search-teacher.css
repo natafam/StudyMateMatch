@@ -1,0 +1,307 @@
+.search-teacher-main-container {
+  width: 100%;
+  display: flex;
+  overflow: auto;
+  min-height: 100vh;
+  align-items: center;
+  flex-direction: column;
+}
+.search-teacher-hero {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  position: relative;
+  align-items: center;
+  flex-direction: column;
+}
+.search-teacher-teachers {
+  gap: 64px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding-top: 192px;
+  padding-left: 80px;
+  padding-right: 80px;
+  flex-direction: column;
+  padding-bottom: 96px;
+  justify-content: center;
+  background-color: #D0F4FD;
+}
+.search-teacher-heading {
+  gap: var(--dl-space-space-oneandhalfunits);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.search-teacher-h2 {
+  font-size: 56px;
+  max-width: 600px;
+  font-style: normal;
+  text-align: center;
+  font-weight: 600;
+}
+.search-teacher-paragraph {
+  font-size: 22px;
+  max-width: 700px;
+  text-align: center;
+  line-height: 27px;
+}
+.search-teacher-chosen-subject {
+  font-size: 28px;
+  max-width: 700px;
+  margin-top: 16px;
+  text-align: center;
+  font-weight: 500;
+  line-height: 27px;
+}
+.search-teacher-subject-name {
+  font-style: normal;
+}
+.search-teacher-subject-value {
+  color: var(--dl-color-teal-tealblue);
+  font-size: 30px;
+  font-weight: 600;
+}
+.search-teacher-grid {
+  gap: var(--dl-space-space-twoandhalfunits);
+  flex: 1;
+  width: auto;
+  display: grid;
+  max-width: 1440px;
+  align-self: center;
+  align-items: flex-start;
+  flex-direction: column;
+  grid-template-columns: repeat(4, 1fr);
+}
+.search-teacher-item {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #F5F5F7;
+}
+.search-teacher-teacher {
+  flex: 1;
+  width: auto;
+  display: flex;
+  align-items: center;
+  padding-top: 12px;
+  padding-left: 12px;
+  padding-right: 12px;
+  flex-direction: column;
+  padding-bottom: 20px;
+  justify-content: space-between;
+}
+.search-teacher-form {
+  gap: var(--dl-space-space-fourunits);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+.search-teacher-inputs {
+  gap: var(--dl-space-space-twounits);
+  width: 100%;
+  display: flex;
+  max-width: 600px;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+.search-teacher-subject {
+  width: 100%;
+  align-self: flex-start;
+  background-color: #D0F4FD;
+}
+.search-teacher-lower {
+  gap: var(--dl-space-space-twounits);
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.search-teacher-lower-paragraph {
+  font-size: 11px;
+  max-width: 700px;
+  align-self: center;
+  text-align: center;
+  line-height: 15px;
+}
+.search-teacher-button {
+  gap: var(--dl-space-space-oneandhalfunits);
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.search-teacher-reserve {
+  width: 100%;
+  margin-top: -4px;
+  margin-bottom: -4px;
+  background-color: var(--dl-color-primaryteal-navyblue);
+}
+#search-teacher-reserve-white {
+  color: white;
+}
+.search-teacher-button-paragraph {
+  font-size: 11px;
+  max-width: 700px;
+  align-self: center;
+  text-align: center;
+  line-height: 15px;
+}
+.search-teacher-button-span {
+  color: var(--dl-color-primaryteal-vibrantblue);
+  font-style: normal;
+  font-weight: 600;
+  text-decoration: underline;
+}
+@media(max-width: 991px) {
+  .search-teacher-hero {
+    flex: 1;
+  }
+  .search-teacher-teachers {
+    padding-top: 184px;
+  }
+  .search-teacher-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .search-teacher-item {
+    height: auto;
+  }
+  .search-teacher-lower-paragraph {
+    font-size: 10px;
+  }
+  .search-teacher-button-paragraph {
+    font-size: 10px;
+  }
+}
+@media(max-width: 767px) {
+  .search-teacher-hero {
+    height: 709px;
+  }
+  .search-teacher-teachers {
+    padding-top: 160px;
+  }
+  .search-teacher-heading {
+    gap: var(--dl-space-space-unit);
+  }
+  .search-teacher-h2 {
+    font-size: 32px;
+  }
+  .search-teacher-paragraph {
+    font-size: 14px;
+    max-width: 80%;
+    line-height: 24px;
+  }
+  .search-teacher-chosen-subject {
+    font-size: 14px;
+    max-width: 80%;
+    line-height: 24px;
+  }
+  .search-teacher-grid {
+    gap: var(--dl-space-space-twounits);
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .search-teacher-form {
+    gap: var(--dl-space-space-threeunits);
+  }
+  .search-teacher-inputs {
+    gap: var(--dl-space-space-oneandhalfunits);
+  }
+}
+@media(max-width: 479px) {
+  .search-teacher-grid {
+    gap: var(--dl-space-space-unit);
+  }
+}
+
+
+/* ------------------------- */
+/*  Teacher Item */
+.teacher {
+  gap: var(--dl-space-space-oneandhalfunits);
+  width: 100%;
+  display: flex;
+  position: relative;
+  max-width: 270px;
+  align-items: center;
+  flex-direction: column;
+}
+.teacher-image {
+  width: 100%;
+  max-width: 256px;
+  object-fit: cover;
+}
+.teacher-heading {
+  gap: 16px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.teacher-name {
+  width: 100%;
+  font-size: 22.5px;
+  max-width: 300px;
+  font-style: normal;
+  text-align: center;
+  font-weight: 600;
+}
+.teacher-subject {
+  width: 100%;
+  font-size: 18px;
+  max-width: 300px;
+  text-align: center;
+  line-height: 21px;
+}
+.teacher-root-class-name {
+  max-width: 256px;
+}
+@media(max-width: 1200px) {
+  .teacher-image {
+    width: 100%;
+  }
+  .teacher-heading {
+    gap: 12px;
+  }
+  .teacher-name {
+    font-size: 20.5px;
+  }
+  .teacher-subject {
+    font-size: 13px;
+    max-width: 270px;
+  }
+}
+@media(max-width: 991px) {
+  .teacher-subject {
+    font-size: 12.5px;
+  }
+}
+@media(max-width: 767px) {
+  .teacher-image {
+    width: 200px;
+  }
+  .teacher-heading {
+    gap: 8px;
+  }
+  .teacher-name {
+    font-size: 18.5px;
+    max-width: 200px;
+    line-height: 24px;
+  }
+  .teacher-subject {
+    font-size: 12px;
+    max-width: 200px;
+    line-height: 18px;
+  }
+}
+@media(max-width: 479px) {
+  .teacher-image {
+    max-width: 184px;
+  }
+}

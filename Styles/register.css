@@ -1,0 +1,439 @@
+.register-main-container {
+  width: 100%;
+  display: flex;
+  overflow: auto;
+  min-height: 100vh;
+  align-items: center;
+  flex-direction: column;
+}
+.register-hero {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  position: relative;
+  align-items: center;
+  flex-direction: column;
+}
+.register-main {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  z-index: 100;
+  max-width: 1440px;
+  align-items: stretch;
+  padding-top: 118px;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.register-content {
+  gap: 48px;
+  width: 100%;
+  display: flex;
+  align-self: flex-start;
+  align-items: flex-start;
+  padding-top: 92px;
+  padding-left: 80px;
+  padding-right: 40px;
+  flex-direction: column;
+  padding-bottom: 92px;
+  justify-content: center;
+}
+.register-heading, .register-form-heading, #register-form {
+  gap: 16px;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: center;
+}
+.register-h3 {
+  width: 100%;
+  font-size: 38px;
+  max-width: 750px;
+  font-style: normal;
+  text-align: left;
+  font-weight: 600;
+  line-height: 50px;
+}
+.register-h4 {
+  width: 100%;
+  font-size: 36px;
+  max-width: 550px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 44px;
+}
+.register-caption {
+  width: 100%;
+  height: 100%;
+  font-size: 20px;
+  max-width: 600px;
+  line-height: 27px;
+  padding-top: 16px;
+}
+.register-paragraph {
+  width: 100%;
+  height: 100%;
+  font-size: 22px;
+  max-width: 500px;
+  line-height: 27px;
+}
+.register-form-content {
+  gap: 48px;
+  width: 80%;
+  display: flex;
+  align-items: flex-start;
+  padding-top: 32px;
+  padding-left: 40px;
+  padding-right: 40px;
+  flex-direction: column;
+  padding-bottom: 32px;
+  justify-content: center;
+}
+.register-h2 {
+  width: 100%;
+  font-size: 48px;
+  max-width: 750px;
+  font-style: normal;
+  text-align: center;
+  font-weight: 600;
+  line-height: 68px;
+  margin-bottom: 4px;
+}
+.register-input {
+  width: 65%;
+  height: 48px;
+  font-size: 18px;
+  align-self: center;
+  border-color: #e8e8e8;
+  border-width: 0.75px;
+  border-radius: 8px;
+}
+.register-lower {
+  gap: var(--dl-space-space-twounits);
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.register-button {
+  gap: 24px;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.register-register {
+  width: 48%;
+  align-self: center;
+  margin-top: 16px;
+  text-align: center;
+  text-decoration: none;
+  background-color: var(--dl-color-red-deepred);
+}
+.register-lower-paragraph {
+  font-size: 11px;
+  max-width: 700px;
+  align-self: center;
+  margin-top: -12px;
+  text-align: center;
+  line-height: 15px;
+  margin-bottom: 44px;
+}
+.register-lower-strong {
+  color: var(--dl-color-primaryteal-vibrantblue);
+  font-style: normal;
+  font-weight: 600;
+  text-decoration: underline;
+}
+.register-ask-h3 {
+  width: 100%;
+  font-size: 28px;
+  max-width: 480px;
+  align-self: center;
+  font-style: normal;
+  text-align: center;
+  font-weight: 600;
+  line-height: 36px;
+  padding-top: 20px;
+  border-color: var(--dl-color-primaryteal-bordercolor);
+  border-top-width: 1px;
+}
+.register-teacher-link {
+  color: var(--dl-color-primaryteal-tealblue);
+  width: 100%;
+  font-size: 28px;
+  max-width: 480px;
+  align-self: center;
+  font-style: normal;
+  margin-top: -16px;
+  text-align: center;
+  transition: 0.3s;
+  font-weight: 600;
+  line-height: 36px;
+  padding-bottom: 16px;
+  text-decoration: none;
+}
+.register-teacher-link:hover {
+  opacity: 0.5;
+}
+.register-background {
+  right: 0px;
+  width: 48%;
+  bottom: 0px;
+  height: 100%;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-end;
+  background-color: #D0F4FD;
+}
+@media(max-width: 1200px) {
+  .register-content {
+    padding-right: 30px;
+  }
+  .register-h3 {
+    width: 95%;
+    font-size: 36px;
+    line-height: 50px;
+    margin-right: 0px;
+  }
+  .register-h4 {
+    font-size: 36px;
+    font-style: normal;
+    text-align: left;
+    font-weight: 600;
+    line-height: 50px;
+    margin-right: 0px;
+  }
+  .register-caption {
+    width: 100%;
+    font-size: 20px;
+    line-height: 27px;
+  }
+  .register-paragraph {
+    max-width: 100%;
+  }
+  .register-h2 {
+    font-size: 42px;
+    max-width: 100%;
+    margin-right: 0px;
+  }
+  .register-lower-paragraph {
+    font-size: 10px;
+  }
+  .register-lower-strong {
+    color: var(--dl-color-primaryteal-vibrantblue);
+    font-style: normal;
+    font-weight: 600;
+    text-decoration: underline;
+  }
+  .register-background {
+    width: 44%;
+  }
+}
+@media(max-width: 991px) {
+  .register-hero {
+    flex: 1;
+    height: 0px;
+  }
+  .register-main {
+    height: 843px;
+    flex-direction: column;
+    background-color: var(--dl-color-primaryteal-backgroundlightblue);
+  }
+  .register-content {
+    align-items: center;
+    padding-top: 32px;
+    flex-direction: column;
+    padding-bottom: 48px;
+    justify-content: center;
+    background-color: var(--dl-color-gray-white);
+  }
+  .register-heading {
+    width: 100%;
+    max-width: 720px;
+    align-items: center;
+  }
+  .register-h3 {
+    width: 100%;
+    height: 100%;
+    font-size: 50px;
+    max-width: 100%;
+    font-style: normal;
+    text-align: center;
+    font-weight: 600;
+    line-height: 50px;
+    padding-bottom: 4px;
+  }
+  .register-h4 {
+    width: 100%;
+    height: 100%;
+    font-size: 48px;
+    max-width: 100%;
+    font-style: normal;
+    text-align: center;
+    font-weight: 600;
+    line-height: 50px;
+  }
+  .register-caption {
+    text-align: center;
+  }
+  .register-paragraph {
+    text-align: center;
+  }
+  .register-form-content {
+    align-self: center;
+    padding-top: 36px;
+    flex-direction: column;
+    padding-bottom: 40px;
+    justify-content: center;
+  }
+  .register-form-heading {
+    width: 100%;
+    max-width: 720px;
+  }
+  .register-h2 {
+    height: 100%;
+    font-size: 40px;
+  }
+  .register-lower-paragraph {
+    margin-bottom: 32px;
+  }
+  .register-ask-h3 {
+    max-width: 532px;
+  }
+  .register-background {
+    width: 100%;
+    height: 54%;
+    position: absolute;
+  }
+}
+@media(max-width: 767px) {
+  .register-main {
+    gap: 48px;
+    align-items: flex-end;
+    padding-left: 4px;
+    justify-content: center;
+  }
+  .register-content {
+    width: 100%;
+    align-self: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .register-heading {
+    width: 100%;
+  }
+  .register-h3, .register-h4 {
+    width: 100%;
+    height: 100%;
+    font-size: 32px;
+    line-height: 38px;
+  }
+  .register-caption {
+    font-size: 16px;
+    max-width: 100%;
+    line-height: 24px;
+  }
+  .register-paragraph {
+    font-size: 18px;
+    max-width: 90%;
+    line-height: 24px;
+  }
+  .register-form-content {
+    width: 100%;
+    align-self: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .register-form-heading {
+    width: 100%;
+    align-items: center;
+  }
+  .register-h2 {
+    font-size: 32px;
+    max-width: 70%;
+    line-height: 38px;
+  }
+  .register-lower-paragraph {
+    margin-bottom: 24px;
+  }
+  .register-ask-h3 {
+    max-width: 512px;
+  }
+  .register-background {
+    height: 55.5%;
+  }
+}
+@media(max-width: 479px) {
+  .register-main {
+    padding-left: 0px;
+  }
+  .register-content {
+    width: 100%;
+    align-self: center;
+    align-items: center;
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+  .register-heading {
+    align-items: center;
+    padding-left: 0px;
+  }
+  .register-h3 {
+    height: 100%;
+    font-size: 30px;
+    max-width: 80%;
+  }
+  .register-h4 {
+    height: 100%;
+    font-size: 30px;
+    max-width: 80%;
+  }
+  .register-caption {
+    max-width: 90%;
+  }
+  .register-paragraph {
+    max-width: 90%;
+  }
+  .register-form-content {
+    width: 100%;
+    align-self: center;
+    align-items: center;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-bottom: 36px;
+  }
+  .register-form-heading {
+    align-items: center;
+    padding-left: 0px;
+  }
+  .register-h2 {
+    font-size: 30px;
+    max-width: 80%;
+  }
+  .register-register {
+    width: 268px;
+    height: 55px;
+    align-self: center;
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+  .register-ask-h3 {
+    font-size: 26px;
+    max-width: 78%;
+  }
+  .register-teacher-link {
+    font-size: 26px;
+    max-width: 80%;
+  }
+  .register-background {
+    height: 54%;
+  }
+}

@@ -1,0 +1,263 @@
+.account-teacher-settings-main-container {
+  width: 100%;
+  display: flex;
+  overflow: auto;
+  min-height: 100vh;
+  align-items: center;
+  flex-direction: column;
+}
+.account-teacher-settings-hero {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  position: relative;
+  align-items: center;
+  flex-direction: column;
+}
+.account-teacher-settings-main {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  z-index: 100;
+  max-width: 1440px;
+  padding-top: 118px;
+  flex-direction: row;
+  justify-content: center;
+}
+.account-teacher-settings-content {
+  gap: 48px;
+  width: 800px;
+  display: flex;
+  align-items: flex-start;
+  padding-top: 40px;
+  padding-left: 40px;
+  padding-right: 40px;
+  flex-direction: column;
+  padding-bottom: 48px;
+  justify-content: center;
+  background-color: #d0f4fd;
+}
+.account-teacher-settings-header {
+  color: var(--dl-color-primaryteal-navyblue);
+  width: auto;
+  font-size: 58px;
+  max-width: 750px;
+  align-self: center;
+  font-style: normal;
+  margin-top: 16px;
+  text-align: center;
+  font-weight: 600;
+  line-height: 64px;
+  margin-bottom: 8px;
+}
+.account-teacher-settings-change-data {
+  gap: 16px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+.account-teacher-settings-header1 {
+  width: 52%;
+  font-size: 48px;
+  align-self: center;
+  font-style: normal;
+  text-align: center;
+  font-weight: 600;
+  line-height: 88px;
+  padding-top: 12px;
+  border-color: var(--dl-color-primaryteal-bordercolor);
+  border-top-width: 1px;
+}
+.account-teacher-settings-header2 {
+  font-size: 36px;
+  align-self: center;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 44px;
+  margin-bottom: 8px;
+}
+.account-teacher-settings-name,
+.account-teacher-settings-surname,
+.account-teacher-settings-phone,
+.account-teacher-settings-email {
+  width: 65%;
+  height: 48px;
+  font-size: 18px;
+  align-self: center;
+  border-color: #e8e8e8;
+  border-width: .75px;
+  border-radius: 8px;
+}
+.account-teacher-settings-confirm {
+  width: 45%;
+  align-self: center;
+  margin-top: 16px;
+  text-align: center;
+  background-color: var(--dl-color-red-deepred);
+}
+.account-teacher-settings-change-password {
+  gap: 16px;
+  width: 100%;
+  display: flex;
+  align-self: center;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: center;
+}
+.account-teacher-settings-caption {
+  width: 52%;
+  font-size: 18px;
+  align-self: center;
+  text-align: center;
+  line-height: 27px;
+  padding-top: 32px;
+  border-color: var(--dl-color-primaryteal-bordercolor);
+  margin-bottom: -8px;
+  border-top-width: 1px;
+}
+.account-teacher-settings-caption1 {
+  color: var(--dl-color-red-strongpink);
+  width: 60%;
+  font-size: 32px;
+  align-self: center;
+  text-align: center;
+  font-weight: 700;
+  line-height: 44px;
+}
+.account-teacher-settings-caption1:hover {
+  opacity: .75;
+}
+.account-teacher-settings-password,
+.account-teacher-settings-password1 {
+  width: 65%;
+  height: 48px;
+  font-size: 18px;
+  align-self: center;
+  border-color: #e8e8e8;
+  border-width: .75px;
+  border-radius: 8px;
+}
+.account-teacher-settings-confirm1 {
+  width: 45%;
+  align-self: center;
+  margin-top: 16px;
+  text-align: center;
+  background-color: var(--dl-color-red-deepred);
+}
+@media (max-width: 1200px) {
+}
+@media (max-width: 991px) {
+  .account-teacher-settings-hero {
+    flex: 1;
+    height: 0;
+  }
+  .account-teacher-settings-main {
+    height: 843px;
+    flex-direction: column;
+  }
+  .account-teacher-settings-content {
+    align-self: center;
+    padding-top: 36px;
+    flex-direction: column;
+    padding-bottom: 45px;
+    justify-content: center;
+  }
+  .account-teacher-settings-change-data {
+    width: 100%;
+    max-width: 720px;
+  }
+}
+@media (max-width: 767px) {
+  .account-teacher-settings-main {
+    gap: 48px;
+    align-items: flex-end;
+    padding-left: 4px;
+    justify-content: center;
+  }
+  .account-teacher-settings-content {
+    width: 100%;
+    align-self: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .account-teacher-settings-header {
+    font-size: 52px;
+    margin-bottom: 0;
+  }
+  .account-teacher-settings-change-data {
+    width: 100%;
+    align-items: center;
+  }
+  .account-teacher-settings-header1 {
+    font-size: 44px;
+    line-height: 64px;
+    padding-top: 16px;
+  }
+  .account-teacher-settings-header2 {
+    font-size: 32px;
+  }
+  .account-teacher-settings-caption {
+    font-size: 18px;
+    line-height: 22px;
+  }
+  .account-teacher-settings-caption1 {
+    font-size: 28.5px;
+  }
+}
+@media (max-width: 479px) {
+  .account-teacher-settings-main {
+    padding-left: 0;
+  }
+  .account-teacher-settings-content {
+    width: 100%;
+    align-self: center;
+    align-items: center;
+    padding-left: 0;
+    padding-right: 0;
+    padding-bottom: 36px;
+  }
+  .account-teacher-settings-header {
+    font-size: 40px;
+    max-width: 85%;
+    line-height: 48px;
+  }
+  .account-teacher-settings-change-data {
+    align-items: center;
+    padding-left: 0;
+  }
+  .account-teacher-settings-header1 {
+    font-size: 36px;
+    max-width: 85%;
+    line-height: 44px;
+    padding-top: 20px;
+  }
+  .account-teacher-settings-header2 {
+    font-size: 28.5px;
+    max-width: 85%;
+  }
+  .account-teacher-settings-confirm {
+    width: 268px;
+    height: 55px;
+    align-self: center;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .account-teacher-settings-caption {
+    max-width: 85%;
+    line-height: 18px;
+  }
+  .account-teacher-settings-caption1 {
+    font-size: 26.5px;
+    max-width: 85%;
+  }
+  .account-teacher-settings-confirm1 {
+    width: 268px;
+    height: 55px;
+    align-self: center;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}

@@ -1,0 +1,316 @@
+.teacher-interface-main-container {
+  width: 100%;
+  display: flex;
+  overflow: auto;
+  min-height: 100vh;
+  align-items: center;
+  flex-direction: column;
+}
+.teacher-interface-hero {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  position: relative;
+  align-items: center;
+  flex-direction: column;
+}
+.teacher-interface-main {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  z-index: 100;
+  padding-top: 118px;
+  flex-direction: row;
+  justify-content: center;
+}
+.teacher-interface-content {
+  gap: 48px;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  padding-top: 32px;
+  flex-direction: column;
+  justify-content: center;
+}
+.teacher-interface-profile {
+  gap: 16px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+.teacher-interface-header {
+  gap: 16px;
+  width: 100%;
+  display: flex;
+  align-self: center;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+}
+.teacher-interface-user {
+  width: 54px;
+  height: 54px;
+  object-fit: cover;
+}
+.teacher-interface-h2 {
+  width: auto;
+  font-size: 58px;
+  max-width: 750px;
+  align-self: center;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 96px;
+  margin-bottom: 8px;
+}
+.teacher-interface-background {
+  width: 100%;
+  display: flex;
+  max-width: 100rem;
+  align-self: center;
+  align-items: flex-start;
+  padding-top: 48px;
+  flex-direction: row;
+  padding-bottom: 48px;
+  justify-content: center;
+  background-color: var(--dl-color-primaryteal-backgroundlightblue);
+}
+.teacher-interface-container {
+  width: 90%;
+  display: flex;
+  align-self: center;
+  align-items: flex-start;
+  padding-top: var(--dl-space-space-unit);
+  flex-direction: row;
+  padding-bottom: var(--dl-space-space-unit);
+  justify-content: center;
+}
+.teacher-interface-informations {
+  gap: 16px;
+  width: 42%;
+  display: flex;
+  align-self: flex-start;
+  align-items: flex-start;
+  padding-top: 16px;
+  border-color: var(--dl-color-primaryteal-bordercolor);
+  padding-right: 24px;
+  flex-direction: column;
+  padding-bottom: 8px;
+  justify-content: flex-start;
+  border-right-width: 1px;
+}
+.teacher-interface-h4-info {
+  font-size: 36px;
+  align-self: center;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 44px;
+  margin-bottom: 8px;
+}
+.teacher-interface-data {
+  gap: 16px;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+.teacher-interface-info {
+  gap: var(--dl-space-space-halfunit);
+  margin-left: var(--dl-space-space-oneandhalfunits);
+}
+#type {
+  gap: var(--dl-space-space-halfunit);
+  margin-top: var(--dl-space-space-halfunit);
+  margin-left: var(--dl-space-space-oneandhalfunits);
+  padding-top: var(--dl-space-space-unit);
+  border-color: var(--dl-color-primaryteal-bordercolor);
+  border-top-width: 1px;
+}
+.teacher-data {
+  fill: var(--dl-color-primaryteal-graytext);
+  color: var(--dl-color-primaryteal-graytext);
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 27px;
+  margin-right: 2px;
+}
+#account-type {
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 27px;
+  margin-right: 2px;
+}
+.teacher-interface-value {
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 27px;
+  font-style: normal;
+}
+#email-value {
+  font-size: 22.5px;
+}
+#type-value {
+  font-size: 24px;
+}
+.teacher-interface-lessons {
+  gap: 16px;
+  width: 42%;
+  display: flex;
+  align-self: flex-start;
+  align-items: flex-start;
+  padding-top: 16px;
+  padding-left: 24px;
+  flex-direction: column;
+  padding-bottom: 8px;
+  justify-content: flex-start;
+}
+.teacher-interface-h4-lessons {
+  font-size: 36px;
+  align-self: center;
+  font-style: normal;
+  text-align: center;
+  font-weight: 600;
+  line-height: 44px;
+  margin-bottom: 8px;
+}
+.teacher-interface-h5 {
+  width: 400px;
+  font-size: 30px;
+  align-self: center;
+  font-style: normal;
+  margin-top: var(--dl-space-space-unit);
+  text-align: center;
+  font-weight: 600;
+  line-height: 44px;
+  padding-top: var(--dl-space-space-unit);
+  border-color: var(--dl-color-primaryteal-bordercolor);
+  border-top-width: 1px;
+}
+.teacher-interface-button {
+  gap: 16px;
+  display: flex;
+  align-self: center;
+  margin-top: -4px;
+  justify-content: center;
+}
+.teacher-interface-lessons-button {
+  width: 144px;
+  background-color: var(--dl-color-primaryteal-vibrantblue);
+}
+.teacher-interface-button-text {
+  font-size: 18px;
+}
+@media(max-width: 1200px) {
+  .teacher-interface-informations {
+    width: 42%;
+  }
+  .teacher-interface-lessons {
+    width: 42%;
+  }
+}
+@media(max-width: 991px) {
+  .teacher-interface-hero {
+    flex: 1;
+    height: 0px;
+  }
+  .teacher-interface-main {
+    height: 843px;
+    flex-direction: column;
+  }
+  .teacher-interface-content {
+    padding-top: 36px;
+  }
+  .teacher-interface-informations {
+    width: 62%;
+  }
+  .teacher-interface-h4-info {
+    font-size: 34px;
+  }
+  #email-value {
+    font-size: 20.5px;
+  }
+  .teacher-interface-lessons {
+    width: 38%;
+  }
+  .teacher-interface-h4-lessons {
+    font-size: 34px;
+  }
+  .teacher-interface-h5 {
+    width: 300px;
+    font-size: 26.5px;
+  }
+}
+@media(max-width: 767px) {
+  .teacher-interface-main {
+    gap: 48px;
+    align-items: flex-end;
+    padding-left: 4px;
+    justify-content: center;
+  }
+  .teacher-interface-profile {
+    width: 100%;
+  }
+  .teacher-interface-user {
+    width: 52px;
+    height: 52px;
+  }
+  .teacher-interface-h2 {
+    font-size: 52px;
+  }
+  .teacher-interface-container {
+    width: 100%;
+    flex-direction: column;
+  }
+  .teacher-interface-informations {
+    width: 90%;
+    align-self: center;
+    border-width: 0px;
+    padding-right: 0px;
+  }
+  .teacher-interface-h4-info {
+    font-size: 32px;
+    line-height: 32px;
+  }
+  .teacher-interface-lessons {
+    width: 90%;
+    align-self: center;
+    margin-top: var(--dl-space-space-twoandhalfunits);
+    padding-top: var(--dl-space-space-twounits);
+    border-color: #9498a1;
+    padding-left: 4px;
+    border-top-width: 1px;
+  }
+  .teacher-interface-h4-lessons {
+    font-size: 32px;
+  }
+  .teacher-interface-lessons-button {
+    width: var(--dl-size-size-xxlarge);
+    align-self: center;
+  }
+}
+@media(max-width: 479px) {
+  .teacher-interface-main {
+    padding-left: 0px;
+  }
+  .teacher-interface-value {
+    width: 100%;
+    align-self: center;
+    align-items: center;
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+  .teacher-interface-h2 {
+    font-size: 48px;
+  }
+  .teacher-interface-background {
+    padding-top: var(--dl-space-space-unit);
+    padding-bottom: var(--dl-space-space-unit);
+  }
+  .teacher-interface-value {
+    width: 80%;
+    max-width: 100%;
+    align-self: center;
+    text-align: center;
+  }
+}

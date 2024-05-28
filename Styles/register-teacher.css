@@ -1,0 +1,410 @@
+.register-teacher-main-container {
+  width: 100%;
+  display: flex;
+  overflow: auto;
+  min-height: 100vh;
+  align-items: center;
+  flex-direction: column;
+}
+.register-teacher-hero {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  position: relative;
+  align-items: center;
+  flex-direction: column;
+}
+.register-teacher-main {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  z-index: 100;
+  max-width: 1440px;
+  align-items: stretch;
+  padding-top: 118px;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.register-teacher-content {
+  gap: 48px;
+  width: 100%;
+  display: flex;
+  align-self: flex-start;
+  align-items: flex-start;
+  padding-top: 92px;
+  padding-left: 80px;
+  padding-right: 40px;
+  flex-direction: column;
+  padding-bottom: 92px;
+  justify-content: center;
+}
+.register-teacher-heading, .register-teacher-form-heading, #register-teacher-form {
+  gap: 16px;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: center;
+}
+.register-teacher-h3 {
+  width: 100%;
+  font-size: 36.5px;
+  max-width: 750px;
+  font-style: normal;
+  text-align: left;
+  font-weight: 600;
+  line-height: 50px;
+}
+.register-teacher-h4 {
+  width: 100%;
+  font-size: 34.5px;
+  max-width: 650px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 44px;
+}
+.register-teacher-caption {
+  width: 100%;
+  height: 100%;
+  font-size: 20px;
+  max-width: 600px;
+  line-height: 27px;
+  padding-top: 16px;
+}
+.register-teacher-paragraph {
+  width: 100%;
+  height: 100%;
+  font-size: 22px;
+  max-width: 360px;
+  line-height: 27px;
+}
+.register-teacher-form-content {
+  gap: 48px;
+  width: 80%;
+  display: flex;
+  align-items: flex-start;
+  padding-top: 32px;
+  padding-left: 40px;
+  padding-right: 40px;
+  flex-direction: column;
+  padding-bottom: 32px;
+  justify-content: center;
+}
+.register-teacher-h2 {
+  width: 100%;
+  font-size: 44px;
+  max-width: 500px;
+  align-self: center;
+  font-style: normal;
+  text-align: center;
+  font-weight: 600;
+  line-height: 52px;
+  margin-bottom: 4px;
+}
+.register-teacher-input {
+  width: 65%;
+  height: 48px;
+  font-size: 18px;
+  align-self: center;
+  border-color: #e8e8e8;
+  border-width: .75px;
+  border-radius: 8px;
+}
+.register-teacher-subject {
+  align-self: flex-start;
+  margin-left: 100px;
+  background-color: var(--dl-color-primaryteal-backgroundlightblue);
+}
+.register-teacher-lower {
+  gap: var(--dl-space-space-twounits);
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.register-teacher-button {
+  gap: 24px;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.register-teacher-register {
+  width: 48%;
+  align-self: center;
+  margin-top: 16px;
+  text-align: center;
+  text-decoration: none;
+  background-color: var(--dl-color-red-deepred);
+}
+.register-teacher-lower-paragraph {
+  font-size: 11px;
+  max-width: 700px;
+  align-self: center;
+  margin-top: -12px;
+  text-align: center;
+  line-height: 15px;
+  margin-bottom: 44px;
+}
+.register-teacher-lower-strong {
+  color: var(--dl-color-primaryteal-vibrantblue);
+  font-style: normal;
+  font-weight: 600;
+  text-decoration: underline;
+}
+.register-teacher-background {
+  right: 0;
+  width: 48%;
+  bottom: 0;
+  height: 100%;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-end;
+  background-color: #d0f4fd;
+}
+@media (max-width: 1200px) {
+  .register-teacher-content {
+    padding-right: 30px;
+  }
+  .register-teacher-h3 {
+    width: 95%;
+    font-size: 36px;
+    line-height: 50px;
+    margin-right: 0;
+  }
+  .register-teacher-h4 {
+    font-size: 32;
+    font-style: normal;
+    text-align: left;
+    font-weight: 600;
+    line-height: 50px;
+    margin-right: 0;
+  }
+  .register-teacher-caption {
+    width: 100%;
+    font-size: 20px;
+    line-height: 27px;
+  }
+  .register-teacher-h2 {
+    font-size: 42px;
+    max-width: 100%;
+    margin-right: 0;
+  }
+  .register-teacher-subject {
+    margin-left: 80px;
+  }
+  .register-teacher-lower-paragraph {
+    font-size: 10px;
+  }
+  .register-teacher-lower-strong {
+    color: var(--dl-color-primaryteal-vibrantblue);
+    font-style: normal;
+    font-weight: 600;
+    text-decoration: underline;
+  }
+  .register-teacher-background {
+    width: 44%;
+  }
+}
+@media (max-width: 991px) {
+  .register-teacher-hero {
+    flex: 1;
+    height: 0;
+  }
+  .register-teacher-main {
+    height: 843px;
+    flex-direction: column;
+    background-color: var(--dl-color-primaryteal-backgroundlightblue);
+  }
+  .register-teacher-content {
+    align-items: center;
+    padding-top: 32px;
+    flex-direction: column;
+    padding-bottom: 48px;
+    justify-content: center;
+    background-color: var(--dl-color-gray-white);
+  }
+  .register-teacher-heading {
+    width: 100%;
+    max-width: 720px;
+    align-items: center;
+  }
+  .register-teacher-h3 {
+    width: 100%;
+    height: 100%;
+    font-size: 46px;
+    max-width: 100%;
+    font-style: normal;
+    text-align: center;
+    font-weight: 600;
+    line-height: 50px;
+    padding-bottom: 4px;
+  }
+  .register-teacher-h4 {
+    width: 100%;
+    height: 100%;
+    font-size: 40px;
+    max-width: 100%;
+    font-style: normal;
+    text-align: center;
+    font-weight: 600;
+    line-height: 50px;
+  }
+  .register-teacher-caption {
+    text-align: center;
+  }
+  .register-teacher-paragraph {
+    max-width: 100%;
+    text-align: center;
+  }
+  .register-teacher-form-content {
+    align-self: center;
+    padding-top: 36px;
+    flex-direction: column;
+    padding-bottom: 40px;
+    justify-content: center;
+  }
+  .register-teacher-form-heading {
+    width: 100%;
+    max-width: 720px;
+  }
+  .register-teacher-h2 {
+    height: 100%;
+    font-size: 40px;
+  }
+  .register-teacher-subject {
+    margin-left: 128px;
+  }
+  .register-teacher-lower-paragraph {
+    margin-bottom: 32px;
+  }
+  .register-teacher-background {
+    width: 100%;
+    height: 54%;
+    position: absolute;
+  }
+}
+@media (max-width: 767px) {
+  .register-teacher-main {
+    gap: 48px;
+    align-items: flex-end;
+    padding-left: 4px;
+    justify-content: center;
+  }
+  .register-teacher-content {
+    width: 100%;
+    align-self: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .register-teacher-heading {
+    width: 100%;
+  }
+  .register-teacher-h3, .register-teacher-h4 {
+    width: 100%;
+    height: 100%;
+    font-size: 32px;
+    line-height: 38px;
+  }
+  .register-teacher-caption {
+    font-size: 16px;
+    max-width: 100%;
+    line-height: 24px;
+  }
+  .register-teacher-paragraph {
+    font-size: 18px;
+    max-width: 90%;
+    line-height: 24px;
+  }
+  .register-teacher-form-content {
+    width: 100%;
+    align-self: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .register-teacher-form-heading {
+    width: 100%;
+    align-items: center;
+  }
+  .register-teacher-h2 {
+    font-size: 32px;
+    max-width: 70%;
+    line-height: 38px;
+  }
+  .register-teacher-subject {
+    margin-left: 120px;
+  }
+  .register-teacher-lower-paragraph {
+    margin-bottom: 24px;
+  }
+  .register-teacher-background {
+    height: 55.5%;
+  }
+}
+@media (max-width: 479px) {
+  .register-teacher-main {
+    padding-left: 0;
+  }
+  .register-teacher-content {
+    width: 100%;
+    align-self: center;
+    align-items: center;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .register-teacher-heading {
+    align-items: center;
+    padding-left: 0;
+  }
+  .register-teacher-h3 {
+    height: 100%;
+    font-size: 30px;
+    max-width: 80%;
+  }
+  .register-teacher-h4 {
+    height: 100%;
+    font-size: 30px;
+    max-width: 80%;
+  }
+  .register-teacher-caption {
+    max-width: 90%;
+  }
+  .register-teacher-paragraph {
+    max-width: 90%;
+  }
+  .register-teacher-form-content {
+    width: 100%;
+    align-self: center;
+    align-items: center;
+    padding-left: 0;
+    padding-right: 0;
+    padding-bottom: 36px;
+  }
+  .register-teacher-form-heading {
+    align-items: center;
+    padding-left: 0;
+  }
+  .register-teacher-h2 {
+    font-size: 30px;
+    max-width: 80%;
+  }
+  .register-teacher-subject {
+    margin-left: 84px;
+  }
+  .register-teacher-register {
+    width: 268px;
+    height: 55px;
+    align-self: center;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .register-teacher-background {
+    height: 54%;
+  }
+}
