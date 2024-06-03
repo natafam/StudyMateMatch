@@ -77,6 +77,11 @@
   line-height: 44px;
   margin-bottom: 8px;
 }
+.account-settings-form {
+  align-items: center;
+  align-content: center;
+  align-self: center;
+}
 .account-settings-name,
 .account-settings-surname,
 .account-settings-nickname,
