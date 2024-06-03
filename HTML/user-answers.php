@@ -82,20 +82,75 @@
         href="../Images/favicon.svg"
         type="icon/svg"
         sizes="32x32"
-/>
+    />
     <link
         rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
         data-tag="font"
-/>
+    />
     <link
         rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
         data-tag="font"
-/>
+    />
 </head>
 
 <body>
+    <?php
+        session_start();
+
+        $db_host = 'localhost';
+        $db_username = 'root';
+        $db_password = '';
+        $db_name = 'StudyMateMatch';
+
+        $conn = new mysqli($db_host, $db_username, $db_password, $db_name);
+
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+
+        $user = array();
+
+        if (isset($_SESSION['User_type']) && $_SESSION['User_type'] == 'User') {
+            $email = $_SESSION['Email'];
+            $sql = "SELECT * FROM users WHERE User_email = ?";
+            
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("s", $email);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            
+            if ($result->num_rows > 0) {
+                $user = $result->fetch_assoc();
+                $user_id = $user['User_ID'];
+
+                // Pobierz pytania zadane przez innych użytkowników, na które zalogowany użytkownik odpowiedział
+                $sql_questions = "
+                    SELECT q.Question_ID, q.Question_text, q.Subject, q.Question_datetime, u.User_nickname 
+                    FROM Questions q
+                    JOIN Answers a ON q.Question_ID = a.Question_ID
+                    JOIN Users u ON q.User_ID = u.User_ID
+                    WHERE a.User_ID = ?
+                ";
+                $stmt_questions = $conn->prepare($sql_questions);
+                $stmt_questions->bind_param("i", $user_id);
+                $stmt_questions->execute();
+                $result_questions = $stmt_questions->get_result();
+            } else {
+                // Jeśli użytkownik nie jest znaleziony, zresetuj sesję i przekieruj do logowania
+                session_unset();
+                session_destroy();
+                header("Location: login.html");
+                exit();
+            }
+        } else {
+            // Jeśli sesja nie jest ustawiona, przekieruj do logowania
+            header("Location: login.html");
+            exit();
+        }
+    ?>
+
     <link rel="stylesheet" href="../Styles/style.css"/>
     <div>
         <link rel="stylesheet" href="../Styles/user-answers.css"/>
@@ -170,81 +225,52 @@
                         </p>
                     </div>
 
-                    <h4 class="user-answers-h4">Pytania, na które odpowiedziałeś</h4>
+                    <h4 class="user-answers-h4">Pytania, na które odpowiedziałeś:</h4>
 
                     <div class="user-answers-grid">
 
-                        <div class="user-answers-item">
-                            <div class="user-answers-box question-box-check-root-class-name">
-                                <div class="question-box-content">
-                                    <div class="question-box-question">
-                                        <div class="question-box-details">
-                                            <span class="question-box-date"><span>01.01.2024</span></span>
-                                            <span class="question-box-user"><span>janek123</span></span>
-                                            <span class="question-box-subject"><span>Matematyka</span></span>
+                        <?php while ($row = $result_questions->fetch_assoc()): ?>
+                            <div class="user-answers-item">
+                                <div class="user-answers-box question-box-check-root-class-name">
+                                    <div class="question-box-content">
+                                        <div class="question-box-question">
+                                            <div class="question-box-details">
+                                                <span class="question-box-date">
+                                                    <span>
+                                                        <?php 
+                                                            // Formatowanie daty
+                                                            $formatted_date = date("d.m.Y", strtotime($row['Question_datetime']));
+                                                            echo htmlspecialchars($formatted_date); 
+                                                        ?>
+                                                    </span>
+                                                </span>
+                                                <span class="question-box-user">
+                                                    <span><?php echo htmlspecialchars($row['User_nickname']); ?></span>
+                                                </span>
+                                                <span class="question-box-subject">
+                                                    <span><?php echo htmlspecialchars($row['Subject']); ?></span>
+                                                </span>
+                                            </div>
+                                            <p class="question-box-question-text">
+                                                <span><?php echo htmlspecialchars($row['Question_text']); ?></span>
+                                            </p>
                                         </div>
-                                        <p class="question-box-question-text">
-                                            <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</span>
-                                        </p>
-                                    </div>
-                                    <div class="question-box-check-answer read-more">
-                                        <span class="question-box-check-span">Sprawdź swoją odpowiedź</span>
-                                        <img src="../Images/Icons/arrow-black.svg" class="question-box-check-image"/>
+                                        <div class="question-box-check-answer read-more">
+                                            <a href="question.php?id=<?php echo $row['Question_ID']; ?>" class="question-box-check-span">Sprawdź swoją odpowiedź</a>
+                                            <img src="../Images/Icons/arrow-black.svg" class="question-box-check-image" />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="user-answers-item">
-                            <div class="user-answers-box question-box-check-root-class-name">
-                                <div class="question-box-content">
-                                    <div class="question-box-question">
-                                        <div class="question-box-details">
-                                            <span class="question-box-date"><span>01.01.2024</span></span>
-                                            <span class="question-box-user"><span>janek123</span></span>
-                                            <span class="question-box-subject"><span>Matematyka</span></span>
-                                        </div>
-                                        <p class="question-box-question-text">
-                                            <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</span>
-                                        </p>
-                                    </div>
-                                    <div class="question-box-check-answer read-more">
-                                        <span class="question-box-check-span">Sprawdź swoją odpowiedź</span>
-                                        <img src="../Images/Icons/arrow-black.svg" class="question-box-check-image"/>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="user-answers-item">
-                            <div class="user-answers-box question-box-check-root-class-name">
-                                <div class="question-box-content">
-                                    <div class="question-box-question">
-                                        <div class="question-box-details">
-                                            <span class="question-box-date"><span>01.01.2024</span></span>
-                                            <span class="question-box-user"><span>janek123</span></span>
-                                            <span class="question-box-subject"><span>Matematyka</span></span>
-                                        </div>
-                                        <p class="question-box-question-text">
-                                            <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</span>
-                                        </p>
-                                    </div>
-                                    <div class="question-box-check-answer read-more">
-                                        <span class="question-box-check-span">Sprawdź swoją odpowiedź</span>
-                                        <img src="../Images/Icons/arrow-black.svg" class="question-box-check-image"/>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <?php endwhile; ?>
 
                     </div>
-
                 </section>
 
             </section>
 
 
-            <footer class="footer footer-root-class-name">
+            <footer class="footer">
                 <div class="footer-container" id="footer-main-container">
 
                     <div class="footer-logo-container">
@@ -274,9 +300,11 @@
 
                 </div>
             </footer>
-
-
         </div>
     </div>
+
+    <?php
+        $conn->close();
+    ?>
 </body>
 </html>

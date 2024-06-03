@@ -96,6 +96,91 @@
 </head>
 
 <body>
+    <?php
+        session_start();
+
+        $db_host = 'localhost';
+        $db_username = 'root';
+        $db_password = '';
+        $db_name = 'StudyMateMatch';
+
+        $conn = new mysqli($db_host, $db_username, $db_password, $db_name);
+
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+
+        $user = array();
+
+        if (isset($_SESSION['User_type']) && $_SESSION['User_type'] == 'User') {
+            $email = $_SESSION['Email'];
+            $sql = "SELECT * FROM users WHERE User_email = ?";
+            
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("s", $email);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            
+            if ($result->num_rows > 0) {
+                $user = $result->fetch_assoc();
+                $user_id = $user['User_ID'];
+            } else {
+                // Jeśli użytkownik nie jest znaleziony, zresetuj sesję i przekieruj do logowania
+                session_unset();
+                session_destroy();
+                header("Location: login.html");
+                exit();
+            }
+        } else {
+            // Jeśli sesja nie jest ustawiona, przekieruj do logowania
+            header("Location: login.html");
+            exit();
+        }
+
+        // Obsługa aktualizacji danych użytkownika
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            if (isset($_POST['update_user_data'])) {
+                $new_name = $_POST['User_name'];
+                $new_surname = $_POST['User_surname'];
+                $new_nickname = $_POST['User_nickname'];
+                $new_email = $_POST['User_email'];
+
+                $sql_update = "UPDATE users SET User_name=?, User_surname=?, User_nickname=?, User_email=? WHERE User_ID=?";
+                $stmt_update = $conn->prepare($sql_update);
+                $stmt_update->bind_param("ssssi", $new_name, $new_surname, $new_nickname, $new_email, $user_id);
+                
+                if ($stmt_update->execute()) {
+                    echo "Dane zostały zaktualizowane.";
+                    $_SESSION['Email'] = $new_email;
+                } else {
+                    echo "Błąd podczas aktualizacji danych: " . $conn->error;
+                }
+            }
+
+            // Obsługa zmiany hasła użytkownika
+            if (isset($_POST['change_password'])) {
+                $old_password = $_POST['old_password'];
+                $new_password = $_POST['new_password'];
+
+                // Sprawdzenie poprawności starego hasła
+                if (password_verify($old_password, $user['User_password'])) {
+                    $new_password_hashed = password_hash($new_password, PASSWORD_DEFAULT);
+                    $sql_password = "UPDATE users SET User_password=? WHERE User_ID=?";
+                    $stmt_password = $conn->prepare($sql_password);
+                    $stmt_password->bind_param("si", $new_password_hashed, $user_id);
+
+                    if ($stmt_password->execute()) {
+                        echo "Hasło zostało zmienione.";
+                    } else {
+                        echo "Błąd podczas zmiany hasła: " . $conn->error;
+                    }
+                } else {
+                    echo "Podane stare hasło jest nieprawidłowe.";
+                }
+            }
+        }
+    ?>
+
     <link rel="stylesheet" href="../Styles/style.css"/>
     <div>
         <link rel="stylesheet" href="../Styles/account-settings.css"/>
@@ -167,6 +252,85 @@
                         <div class="account-settings-change-data">
                             <h3 class="account-settings-header1">Mój profil</h3>
                             <h4 class="account-settings-header2">Zmień dane</h4>
+                            <form method="post" action="" class="account-settings-form">
+                                <input
+                                    type="text"
+                                    name="User_name"
+                                    value="<?php echo htmlspecialchars($user['User_name']); ?>"
+                                    required="true"
+                                    placeholder="Imię"
+                                    autocomplete="given-name"
+                                    class="account-settings-name input"
+                                />
+                                <input
+                                    type="text"
+                                    name="User_surname"
+                                    value="<?php echo htmlspecialchars($user['User_surname']); ?>"
+                                    required="true"
+                                    placeholder="Nazwisko"
+                                    autocomplete="family-name"
+                                    class="account-settings-surname input"
+                                />
+                                <input
+                                    type="text"
+                                    name="User_nickname"
+                                    value="<?php echo htmlspecialchars($user['User_nickname']); ?>"
+                                    required="true"
+                                    placeholder="Pseudonim"
+                                    autocomplete="nickname"
+                                    class="account-settings-nickname input"
+                                />
+                                <input
+                                    type="email"
+                                    name="User_email"
+                                    value="<?php echo htmlspecialchars($user['User_email']); ?>"
+                                    pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$"
+                                    required="true"
+                                    placeholder="E-mail"
+                                    autocomplete="email"
+                                    class="account-settings-email input"
+                                />
+                                <button type="submit" name="update_user_data" class="account-settings-confirm button button-main">
+                                    <span>Potwierdź zmianę danych</span>
+                                </button>
+                            </form>
+                        </div>
+                        <div class="account-settings-change-password">
+                            <p class="account-settings-caption">Chciałbyś zmienić hasło?</p>
+                            <h4 class="account-settings-caption1">Zmień hasło</h4>
+                            <form method="post" action="" class="account-settings-form">
+                                <input
+                                    type="password"
+                                    name="old_password"
+                                    required="true"
+                                    minlength="8"
+                                    placeholder="Stare hasło"
+                                    autocomplete="current-password"
+                                    class="account-settings-password input"
+                                />
+                                <input
+                                    type="password"
+                                    name="new_password"
+                                    required="true"
+                                    minlength="8"
+                                    placeholder="Nowe hasło"
+                                    autocomplete="new-password"
+                                    class="account-settings-password1 input"
+                                />
+                                <button type="submit" name="change_password" class="account-change-password-confirm button button-main">
+                                    <span>Potwierdź zmianę hasła</span>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <div class="account-settings-main">
+                    <div class="account-settings-content">
+                        <h2 class="account-settings-header">Ustawienia konta</h2>
+                        <div class="account-settings-change-data">
+                            <h3 class="account-settings-header1">Mój profil</h3>
+                            <h4 class="account-settings-header2">Zmień dane</h4>
                             <input
                                 type="text"
                                 value=""
@@ -228,12 +392,12 @@
                             </button>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
             </section>
 
             
-            <footer class="footer footer-root-class-name">
+            <footer class="footer">
                 <div class="footer-container" id="footer-main-container">
 
                     <div class="footer-logo-container">
@@ -263,9 +427,11 @@
 
                 </div>
             </footer>
-
-
         </div>
     </div>
+
+    <?php
+        $conn->close();
+    ?>
 </body>
 </html>

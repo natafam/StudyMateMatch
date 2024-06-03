@@ -1,72 +1,3 @@
-<?php
-// Rozpoczęcie sesji
-session_start();
-
-// // Sprawdzenie, czy użytkownik jest zalogowany
-// if (!isset($_SESSION['user_id'])) {
-//     header("Location: login.html");
-//     exit();
-// }
-
-// Konfiguracja
-$db_host = 'localhost';
-$db_username = 'root';
-$db_password = '';
-$db_name = 'StudyMateMatch';
-
-// Utworzenie połączenia
-$conn = new mysqli($db_host, $db_username, $db_password, $db_name);
-
-// Sprawdzenie połączenia
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-// Ustawienie domyślnego warunku WHERE
-$where_clause = "";
-
-// Sprawdzenie, czy użytkownik wybrał przedmiot
-if(isset($_GET['subject']) && !empty($_GET['subject'])) {
-    $subject_filter = $_GET['subject'];
-    $where_clause = " WHERE Q.Subject = ?";
-}
-
-// Aktualizacja zapytania SQL z uwzględnieniem filtra przedmiotu
-$sql = "SELECT Q.Question_ID, Q.Question_text, Q.Subject, Q.Question_datetime, U.User_nickname 
-        FROM Questions Q 
-        JOIN Users U ON Q.User_ID = U.User_ID"
-        . $where_clause . 
-        " ORDER BY Q.Question_datetime DESC";
-
-// Przygotowanie zapytania
-$stmt = $conn->prepare($sql);
-
-// Dodanie wartości filtra przedmiotu, jeśli został wybrany
-if(!empty($where_clause)) {
-    $stmt->bind_param("s", $subject_filter);
-}
-
-// Wykonanie zapytania
-$stmt->execute();
-$result = $stmt->get_result();
-
-/*
-// Pobranie pytania zapisanych przez użytkownika
-// $user_id = $_SESSION['user_id']; // Zakładamy, że user_id jest przechowywany w sesji
-$sql = "SELECT Q.Question_text, Q.Subject, Q.Question_datetime, U.User_nickname 
-        FROM Questions Q 
-        JOIN Users U ON Q.User_ID = U.User_ID
-        ORDER BY Q.Question_datetime DESC";
-$stmt = $conn->prepare($sql);
-// $stmt->bind_param("i", $user_id);
-$stmt->execute();
-$result = $stmt->get_result();
-*/
-
-// Zamknięcie połączenia
-$conn->close();
-?>
-
 <!DOCTYPE html>
 <html lang="pl-PL">
 <head>
@@ -151,23 +82,70 @@ $conn->close();
         href="../Images/favicon.svg"
         type="icon/svg"
         sizes="32x32"
-   />
+    />
     <link
         rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
         data-tag="font"
-   />
+    />
     <link
         rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
         data-tag="font"
-   />
+    />
 </head>
 
 <body>
     <?php
         $isLoggedIn = isset($_SESSION['User_type']) && $_SESSION['User_type'] == 'User';
         $isLoggedIn = isset($_SESSION['User_type']) && $_SESSION['User_type'] == 'Teacher';
+    ?>
+
+    <?php
+        // Rozpoczęcie sesji
+        session_start();
+
+        // Konfiguracja
+        $db_host = 'localhost';
+        $db_username = 'root';
+        $db_password = '';
+        $db_name = 'StudyMateMatch';
+
+        // Utworzenie połączenia
+        $conn = new mysqli($db_host, $db_username, $db_password, $db_name);
+
+        // Sprawdzenie połączenia
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+
+        // Ustawienie domyślnego warunku WHERE
+        $where_clause = "";
+
+        // Sprawdzenie, czy użytkownik wybrał przedmiot
+        if(isset($_GET['subject']) && !empty($_GET['subject'])) {
+            $subject_filter = $_GET['subject'];
+            $where_clause = " WHERE Q.Subject = ?";
+        }
+
+        // Aktualizacja zapytania SQL z uwzględnieniem filtra przedmiotu
+        $sql = "SELECT Q.Question_ID, Q.Question_text, Q.Subject, Q.Question_datetime, U.User_nickname 
+                FROM Questions Q 
+                JOIN Users U ON Q.User_ID = U.User_ID"
+                . $where_clause . 
+                " ORDER BY Q.Question_datetime DESC";
+
+        // Przygotowanie zapytania
+        $stmt = $conn->prepare($sql);
+
+        // Dodanie wartości filtra przedmiotu, jeśli został wybrany
+        if(!empty($where_clause)) {
+            $stmt->bind_param("s", $subject_filter);
+        }
+
+        // Wykonanie zapytania
+        $stmt->execute();
+        $result = $stmt->get_result();
     ?>
     
     <link rel="stylesheet" href="../Styles/style.css"/>
@@ -309,8 +287,8 @@ $conn->close();
                     <form method="get" action="">
                         <label for="subject"></label>
 
-                        <div class="quesion-sent-filter-box">
-                            <select name="subject" id="quesion-sent-subject">
+                        <div class="question-filter-box">
+                            <select name="subject" id="question-subject">
                                 <option value="Wybierz przedmiot">Wybierz przedmiot</option>
                                 <option value="Matematyka">Matematyka</option>
                                 <option value="Polski">Polski</option>
@@ -345,42 +323,42 @@ $conn->close();
 
                     <div class="all-questions-grid">
 
-                    <?php while ($row = $result->fetch_assoc()): ?>
-                        <div class="all-questions-item">
-                            <div class="all-questions-box question-box-check-root-class-name">
-                                <div class="question-box-content">
-                                    <div class="question-box-question">
-                                        <div class="question-box-details">
-                                            <span class="question-box-date">
-                                                <span>
-                                                    <?php 
-                                                    // Formatowanie daty
-                                                    $formatted_date = date("d.m.Y", strtotime($row['Question_datetime']));
-                                                    echo htmlspecialchars($formatted_date); 
-                                                    ?>
+                        <?php while ($row = $result->fetch_assoc()): ?>
+                            <div class="all-questions-item">
+                                <div class="all-questions-box question-box-check-root-class-name">
+                                    <div class="question-box-content">
+                                        <div class="question-box-question">
+                                            <div class="question-box-details">
+                                                <span class="question-box-date">
+                                                    <span>
+                                                        <?php 
+                                                        // Formatowanie daty
+                                                        $formatted_date = date("d.m.Y", strtotime($row['Question_datetime']));
+                                                        echo htmlspecialchars($formatted_date); 
+                                                        ?>
+                                                    </span>
                                                 </span>
-                                            </span>
-                                            <span class="question-box-user">
-                                                <span><?php echo htmlspecialchars($row['User_nickname']); ?></span>
-                                            </span>
-                                            <span class="question-box-subject">
-                                                <span><?php echo htmlspecialchars($row['Subject']); ?></span>
-                                            </span>
+                                                <span class="question-box-user">
+                                                    <span><?php echo htmlspecialchars($row['User_nickname']); ?></span>
+                                                </span>
+                                                <span class="question-box-subject">
+                                                    <span><?php echo htmlspecialchars($row['Subject']); ?></span>
+                                                </span>
+                                            </div>
+                                            <p class="question-box-question-text">
+                                                <span><?php echo htmlspecialchars($row['Question_text']); ?></span>
+                                            </p>
                                         </div>
-                                        <p class="question-box-question-text">
-                                            <span><?php echo htmlspecialchars($row['Question_text']); ?></span>
-                                        </p>
-                                    </div>
-                                    <div class="question-box-check-answer read-more">
-                                        <span class="question-box-check-span">
-                                            <a href="question.php?id=<?php echo $row['Question_ID']; ?>" class="question-box-check-span">Sprawdź odpowiedzi</a>
-                                        </span>
-                                        <img src="../Images/Icons/arrow-black.svg" class="question-box-check-image"/>
+                                        <div class="question-box-check-answer read-more">
+                                            <span class="question-box-check-span">
+                                                <a href="question.php?id=<?php echo $row['Question_ID']; ?>" class="question-box-check-span">Sprawdź odpowiedzi</a>
+                                            </span>
+                                            <img src="../Images/Icons/arrow-black.svg" class="question-box-check-image"/>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    <?php endwhile; ?>
+                        <?php endwhile; ?>
 
                         <!-- <div class="all-questions-item">
                             <div class="all-questions-box question-box-check-root-class-name">
@@ -410,7 +388,7 @@ $conn->close();
             </section>
 
 
-            <footer class="footer footer-root-class-name">
+            <footer class="footer">
                 <div class="footer-container" id="footer-main-container">
 
                     <div class="footer-logo-container">
@@ -440,9 +418,12 @@ $conn->close();
 
                 </div>
             </footer>
-
-
         </div>
     </div>
+
+    <?php
+        // Zamknięcie połączenia
+        $conn->close();
+    ?>
 </body>
 </html>

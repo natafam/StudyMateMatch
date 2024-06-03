@@ -123,6 +123,23 @@
             
             if ($result->num_rows > 0) {
                 $user = $result->fetch_assoc();
+                $user_id = $user['User_ID'];
+
+                // Pobierz liczbę pytań
+                $sql_questions = "SELECT COUNT(*) as question_count FROM Questions WHERE User_ID = ?";
+                $stmt_questions = $conn->prepare($sql_questions);
+                $stmt_questions->bind_param("i", $user_id);
+                $stmt_questions->execute();
+                $result_questions = $stmt_questions->get_result();
+                $question_count = $result_questions->fetch_assoc()['question_count'];
+
+                // Pobierz liczbę odpowiedzi
+                $sql_answers = "SELECT COUNT(*) as answer_count FROM Answers WHERE User_ID = ?";
+                $stmt_answers = $conn->prepare($sql_answers);
+                $stmt_answers->bind_param("i", $user_id);
+                $stmt_answers->execute();
+                $result_answers = $stmt_answers->get_result();
+                $answer_count = $result_answers->fetch_assoc()['answer_count'];
             }
         }
     ?>
@@ -248,12 +265,16 @@
 
                                         <div class="user-interface-info" id="questions">
                                             <span class="user-data" id="user-questions">Zadane pytania:</span>
-                                            <span class="user-interface-value" id="questions-value">3</span>
+                                            <span class="user-interface-value" id="questions-value">
+                                                <?php echo isset($question_count) ? $question_count : '0'; ?>
+                                            </span>
                                         </div>
 
                                         <div class="user-interface-info" id="answers">
                                             <span class="user-data" id="user-answers">Udzielone odpowiedzi:</span>
-                                            <span class="user-interface-value" id="answers-value">2</span>
+                                            <span class="user-interface-value" id="answers-value">
+                                                <?php echo isset($answer_count) ? $answer_count : '0'; ?>
+                                            </span>
                                         </div>
 
 
@@ -279,7 +300,7 @@
             </section>
 
 
-            <footer class="footer footer-root-class-name">
+            <footer class="footer">
                 <div class="footer-container" id="footer-main-container">
 
                     <div class="footer-logo-container">

@@ -237,7 +237,7 @@
             </section>
 
 
-            <footer class="footer footer-root-class-name">
+            <footer class="footer">
                 <div class="footer-container" id="footer-main-container">
 
                     <div class="footer-logo-container">

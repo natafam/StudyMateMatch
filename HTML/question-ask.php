@@ -97,6 +97,11 @@
 
 <body>
     <?php
+        $isLoggedIn = isset($_SESSION['User_type']) && $_SESSION['User_type'] == 'User';
+        $isLoggedIn = isset($_SESSION['User_type']) && $_SESSION['User_type'] == 'Teacher';
+    ?>
+
+    <?php
     // Rozpoczęcie sesji
     session_start();
 
@@ -158,7 +163,7 @@
 
             <section class="question-ask-hero">
                 
-                <?php if (isset($_COOKIE['logged_in'])): ?>
+                <?php if (!isset($_COOKIE['logged_in'])): ?>
                     <header class="navbar">
 
                         <div class="left-navbar">
@@ -167,7 +172,7 @@
                             </a>
 
                             <nav class="navbar-links">
-                                <a href="../HTML/question-ask.html" id="navlink-question-ask">Zadaj pytanie</a>
+                                <a href="./login.php" id="navlink-question-ask">Zadaj pytanie</a>
                             </nav>
 
                             <div class="navbar-search">
@@ -178,10 +183,10 @@
                             </div>
                         </div>
                         <div class="right-navbar">
-                            <a href="../HTML/register.html" class="button button-main" id="navbar-register">
+                            <a href="./register.php" class="button button-main" id="navbar-register">
                             <span class="text">Dołącz już teraz!</span>
                             </a>
-                            <a href="../HTML/login.html" class="button button-main" id="navbar-login">
+                            <a href="./login.php" class="button button-main" id="navbar-login">
                             <span class="text">Zaloguj się</span>
                             </a>
                         </div>
@@ -192,7 +197,7 @@
                         <div class="shown-menu" style="display: none;">
                             <div class="nav">
                                 <div class="navbar-container">
-                                    <a href="../index.html">
+                                    <a href="../index.php">
                                         <img src="../Images/Branding/logo.svg" class="navbar-logo"/>
                                     </a>
                                     <div class="menu-close">
@@ -200,15 +205,15 @@
                                     </div>
                                 </div>
                                 <nav class="nav">
-                                    <a href="../HTML/how-it-works.html" class="navlink">Dlaczego warto?</br>Jak to działa?</a>
-                                    <a href="../HTML/all-subjects.html" class="navlink">Nasze przedmioty szkolne</a>
-                                    <a href="../HTML/question-ask.html" class="navlink">Zadaj pytanie</a>
+                                    <a href="./how-it-works.php" class="navlink">Dlaczego warto?</br>Jak to działa?</a>
+                                    <a href="./all-subjects.php" class="navlink">Nasze przedmioty szkolne</a>
+                                    <a href="./login.php" class="navlink">Zadaj pytanie</a>
                                     <a href="./all-questions.php" class="navlink">Pytania społeczności</a>
-                                    <a href="../HTML/reserve-lesson.php" class="navlink">Zaplanuj lekcję</a>
-                                    <a href="../HTML/calendar.html" class="navlink">Terminarz </a>
+                                    <a href="./reserve-lesson.php" class="navlink">Zaplanuj lekcję</a>
+                                    <a href="./calendar.php" class="navlink">Terminarz </a>
                                     <a href="#contact" class="navlink">Kontakt</a>
-                                    <a href="../HTML/register.html" class="navlink" id="nav-register">Dołącz już teraz!</a>
-                                    <a href="../HTML/login.html" class="button button-main" id="nav-login">
+                                    <a href="./register.php" class="navlink" id="nav-register">Dołącz już teraz!</a>
+                                    <a href="./login.php" class="button button-main" id="nav-login">
                                         <span class="text">Zaloguj się</span>
                                     </a>
                                 </nav>
@@ -329,7 +334,7 @@
             </section>
 
 
-            <footer class="footer footer-root-class-name">
+            <footer class="footer">
                 <div class="footer-container" id="footer-main-container">
 
                     <div class="footer-logo-container">

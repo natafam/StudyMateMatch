@@ -1,48 +1,3 @@
-<?php
-include '../PHP/question-handler.php';
-
-// Rozpoczęcie sesji
-session_start();
-
-// Konfiguracja
-$db_host = 'localhost';
-$db_username = 'root';
-$db_password = '';
-$db_name = 'StudyMateMatch';
-
-// Utworzenie połączenia
-$conn = new mysqli($db_host, $db_username, $db_password, $db_name);
-
-// Sprawdzenie połączenia
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-// // Pobranie identyfikatora pytania z parametrów URL
-// if(isset($_GET['question_id'])) {
-//     $question_id = $_GET['question_id'];
-
-//     // Zapytanie SQL, aby pobrać pytanie o podanym identyfikatorze
-//     $sql = "SELECT * FROM Questions WHERE Question_ID = $question_id";
-//     $result = $conn->query($sql);
-
-//     if ($result->num_rows > 0) {
-//         $row = $result->fetch_assoc();
-//         $question_text = $row['Question_text'];
-//         $subject = $row['Subject'];
-//         $question_datetime = $row['Question_datetime'];
-//         $user_id = $row['User_ID'];
-//     } else {
-//         echo "Brak wyników.";
-//     }
-// } else {
-//     echo "Nie podano identyfikatora pytania.";
-// }
-
-// Zamknięcie połączenia
-$conn->close();
-?>
-
 <!DOCTYPE html>
 <html lang="pl-PL">
 <head>
@@ -127,23 +82,55 @@ $conn->close();
         href="../Images/favicon.svg"
         type="icon/svg"
         sizes="32x32"
-   />
+    />
     <link
         rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
         data-tag="font"
-   />
+    />
     <link
         rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
         data-tag="font"
-   />
+    />
 </head>
 
 <body>
     <?php
         $isLoggedIn = isset($_SESSION['User_type']) && $_SESSION['User_type'] == 'User';
         $isLoggedIn = isset($_SESSION['User_type']) && $_SESSION['User_type'] == 'Teacher';
+    ?>
+
+    <?php
+        include '../PHP/question-handler.php';
+
+        // Rozpoczęcie sesji
+        session_start();
+
+        // Konfiguracja
+        $db_host = 'localhost';
+        $db_username = 'root';
+        $db_password = '';
+        $db_name = 'StudyMateMatch';
+
+        // Utworzenie połączenia
+        $conn = new mysqli($db_host, $db_username, $db_password, $db_name);
+
+        // Sprawdzenie połączenia
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+
+        // $sql_select_answer = "SELECT * FROM Answers WHERE Question_ID = ?";
+        $sql_select_answer = "SELECT A.Answer_text, A.Answer_datetime, U.User_nickname
+                            FROM Answers A
+                            JOIN Users U ON A.User_ID = U.User_ID
+                            WHERE Question_ID = ?";
+        $stmt_select_answer = $conn->prepare($sql_select_answer);
+        $stmt_select_answer->bind_param("i", $question_id);
+        $stmt_select_answer->execute();
+        $result_answers = $stmt_select_answer->get_result();
+        $stmt_select_answer->close();
     ?>
 
     <link rel="stylesheet" href="../Styles/style.css"/>
@@ -278,15 +265,21 @@ $conn->close();
                     <div class="question-heading">
                         <div class="question-content">
 
-                            <section class="questions-container">
-                                <div class="question-box question-box-root-class-name2">
+                            <section id="questions-container">
+                                <div class="question-box">
                                     <div class="question-box-content">
                                         <?php if ($question_data): ?>
                                             <div class="question-box-question">
-                                                <div class="question-details">
-                                                    <span class="question-box-subject"><span><?php echo htmlspecialchars($question_data['Subject']); ?></span></span><br>
-                                                    <span class="question-box-date"><span><?php echo date("d.m.Y", strtotime($question_data['Question_datetime'])); ?></span></span><br>
-                                                    <span class="question-box-user"><span><?php echo htmlspecialchars($question_data['User_nickname']); ?></span></span>
+                                                <div class="question-box-details">
+                                                    <span class="question-box-date">
+                                                        <span><?php echo date("d.m.Y", strtotime($question_data['Question_datetime'])); ?></span>
+                                                    </span>
+                                                    <span class="question-box-user">
+                                                        <span><?php echo htmlspecialchars($question_data['User_nickname']); ?></span>
+                                                    </span>
+                                                    <span class="question-box-subject">
+                                                        <span><?php echo htmlspecialchars($question_data['Subject']); ?></span>
+                                                    </span>
                                                 </div>
                                                 <p class="question-box-question-text">
                                                     <span><?php echo htmlspecialchars($question_data['Question_text']); ?></span>
@@ -299,7 +292,7 @@ $conn->close();
                                 </div>
                             </section>
 
-                            <!-- <div class="question-box question-box-root-class-name2">
+                            <!-- <div class="question-box">
                                 <div class="question-box-content">
                                     <div class="question-box-question">
                                         <div class="question-box-details">
@@ -316,33 +309,28 @@ $conn->close();
 
 
                             <section id="answers-container">
-                                <?php
-                                // Fetch and display existing answers from the database
-                                $answers_sql = "SELECT * FROM Answers WHERE Question_ID = ?";
-                                $answers_stmt = $conn->prepare($answers_sql);
-                                $answers_stmt->bind_param("i", $question_id);
-                                $answers_stmt->execute();
-                                $answers_result = $answers_stmt->get_result();
-
-                                while ($answer = $answers_result->fetch_assoc()):
-                                ?>
-                                    <div class="answer-box answer-box-root-class-name2">
-                                        <div class="answer-box-content">
-                                            <div class="answer-box-answer">
-                                                <div class="answer-box-details">
-                                                    <span class="answer-box-date"><?php echo date("d.m.Y", strtotime($answer['Answer_datetime'])); ?></span>
-                                                    <span class="answer-box-user"><?php echo htmlspecialchars($answer['User_ID']); ?></span>
+                                <?php if ($result_answers->num_rows > 0): ?>
+                                    <?php while ($answer = $result_answers->fetch_assoc()): ?>
+                                        <div class="answer-box">
+                                            <div class="answer-box-content">
+                                                <div class="answer-box-answer">
+                                                    <div class="answer-box-details">
+                                                        <span class="answer-box-date"><span><?php echo date("d.m.Y", strtotime($answer['Answer_datetime'])); ?></span></span>
+                                                        <span class="answer-box-user"><span><?php echo htmlspecialchars($answer['User_nickname']); ?></span></span>
+                                                    </div>
+                                                    <p class="answer-box-answer-text">
+                                                        <span><?php echo htmlspecialchars($answer['Answer_text']); ?></span>
+                                                    </p>
                                                 </div>
-                                                <p class="answer-box-answer-text">
-                                                    <?php echo htmlspecialchars($answer['Answer_text']); ?>
-                                                </p>
                                             </div>
                                         </div>
-                                    </div>
-                                <?php endwhile; ?>
+                                    <?php endwhile; ?>
+                                <?php else: ?>
+                                    <p>Brak odpowiedzi na to pytanie.</p>
+                                <?php endif; ?>
                             </section>
 
-                            <div class="answer-box answer-box-root-class-name2">
+                            <!-- <div class="answer-box">
                                 <div class="answer-box-content">
                                     <div class="answer-box-answer">
                                         <div class="answer-box-details">
@@ -354,14 +342,14 @@ $conn->close();
                                         </p>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
 
 
                             <section id="new-answer-container">
                                 <div class="new-answer-box">
                                     <div class="question-answer">
                                         <h2 class="answer-text">Dodaj swoją odpowiedź</h2>
-                                        <form method="POST">
+                                        <form method="POST" class="new-answer-box-details">
                                             <input type="hidden" name="question_id" value="<?php echo $question_id; ?>">
                                             <textarea name="answer_text" placeholder="Tutaj jest miejsce na Twoją odpowiedź!" class="answer-textarea textarea" required></textarea>
                                             <div class="answer-lower">
@@ -381,7 +369,7 @@ $conn->close();
             </section>
 
 
-            <footer class="footer footer-root-class-name">
+            <footer class="footer">
                 <div class="footer-container" id="footer-main-container">
 
                     <div class="footer-logo-container">
@@ -415,83 +403,91 @@ $conn->close();
 
         </div>
     </div>
+
+    <?php
+        // Zamknięcie połączenia
+        $conn->close();
+    ?>
+
+    <?php
+        HandleRequest();
+        function HandleRequest()
+        {
+            $DATA = $_POST;
+            
+            if (!isset($DATA) || empty($DATA))
+                return $DATA;
+
+            session_start();
+
+            // Sprawdzenie, czy identyfikator użytkownika istnieje w sesji
+            if (isset($_SESSION['User_ID'])) {
+                $user_id = $_SESSION['User_ID']; // Pobieranie identyfikatora użytkownika z sesji
+            } else {
+                // Obsłużenie przypadku, gdy identyfikator użytkownika nie jest ustawiony w sesji
+                echo "Error: User_ID not set in session.";
+                exit();
+            }
+            
+            // Konfiguracja bazy danych
+            $db_host = 'localhost';
+            $db_username = 'root';
+            $db_password = '';
+            $db_name = 'StudyMateMatch';
+            
+            // Utworzenie połączenia
+            $conn = new mysqli($db_host, $db_username, $db_password, $db_name);
+            
+            // Sprawdzenie połączenia
+            if ($conn->connect_error) {
+                die("Connection failed: " . $conn->connect_error);
+            }
+            
+            // Sprawdzenie, czy dane zostały przesłane metodą POST
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                // Pobranie danych z formularza
+                $question_id = $_POST['question_id'];
+                $answer_text = $_POST['answer_text'];
+                $answer_datetime = date('Y-m-d H:i:s');
+                $user_id = $_SESSION['User_ID'];
+                
+                // Zapytanie SQL do sprawdzenia duplikatów odpowiedzi
+                $sql_check_duplicate = "SELECT * FROM Answers
+                                        WHERE Answer_text = ? AND Question_ID = ?";
+                $stmt_check_duplicate = $conn->prepare($sql_check_duplicate);
+                $stmt_check_duplicate->bind_param("si", $answer_text, $question_id);
+                $stmt_check_duplicate->execute();
+                $result_check_duplicate = $stmt_check_duplicate->get_result();
+                $stmt_check_duplicate->close();
+
+                // Sprawdzenie, czy podobna odpowiedź już istnieje
+                if ($result_check_duplicate->num_rows > 0) {
+                    echo "Odpowiedź na to pytanie już istnieje.";
+                } else {
+                    // Zapytanie SQL do dodania odpowiedzi do tabeli Answers
+                    $sql = "INSERT INTO Answers (Answer_text, Answer_datetime, Question_ID, User_ID) 
+                            VALUES (?, ?, ?, ?)";
+                    $stmt = $conn->prepare($sql);
+                    $stmt->bind_param("ssii", $answer_text, $answer_datetime, $question_id, $user_id);
+                    
+                    if ($stmt->execute()) {
+                        echo "Odpowiedź została dodana pomyślnie.";
+                        header("Location: ../HTML/question.php?question_id=" . $question_id);
+                        exit();
+                    } else {
+                        echo "Błąd: " . $stmt->error;
+                    }
+
+                    $stmt->close();
+                }
+            } else {
+                echo "Dane nie zostały przesłane metodą POST.";
+            }
+            
+            // Zamknięcie połączenia
+            $conn->close();
+        }
+    ?>
 </body>
 </html>
 
-<?php
-HandleRequest();
-function HandleRequest()
-{
-    $DATA = $_POST;
-    
-    if (!isset($DATA) || empty($DATA))
-        return $DATA;
-
-    session_start();
-
-
-    // Sprawdzenie, czy identyfikator użytkownika istnieje w sesji
-    if (isset($_SESSION['User_ID'])) {
-        $user_id = $_SESSION['User_ID']; // Pobieranie identyfikatora użytkownika z sesji
-    } else {
-        // Obsłużenie przypadku, gdy identyfikator użytkownika nie jest ustawiony w sesji
-        echo "Error: User_ID not set in session.";
-        exit();
-    }
-    
-    // Konfiguracja bazy danych
-    $db_host = 'localhost';
-    $db_username = 'root';
-    $db_password = '';
-    $db_name = 'StudyMateMatch';
-    
-    // Utworzenie połączenia
-    $conn = new mysqli($db_host, $db_username, $db_password, $db_name);
-    
-    // Sprawdzenie połączenia
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-
-    // Sprawdzenie czy dane zostały przesłane metodą POST
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        // Pobranie danych z formularza
-        $question_id = $_POST['question_id'];
-        $answer_text = $_POST['answer_text'];
-        $answer_datetime = date('Y-m-d H:i:s');
-        $user_id = $_SESSION['User_ID']; // Zakładam, że ID użytkownika jest przechowywane w sesji
-        
-        
-        // Zapytanie SQL do dodania odpowiedzi do tabeli Answers
-        $sql = "INSERT INTO Answers (Answer_text, Answer_datetime, Question_ID, User_ID) 
-                VALUES (?, ?, ?, ?)";
-    
-    $stmt = $conn->prepare($sql);
-    try
-    {
-        var_dump($conn->error);
-        echo "entering";
-        $result = $stmt->bind_param("ssii", $answer_text, $answer_datetime, $question_id, $user_id);
-        echo "exiting";
-    }
-    catch (Exception $ex)
-    {
-        var_dump($result);
-        return;
-    }
-    print_r($DATA);
-    
-        if ($stmt->execute()) {
-            echo "Odpowiedź została dodana pomyślnie.";
-            header("Location: ../HTML/question.php?question_id=" . $question_id);
-        } else {
-            echo "Błąd: " . $stmt->error;
-        }
-    
-        $stmt->close();
-    }
-    
-    // Zamknięcie połączenia
-    $conn->close();
-}
-?>
